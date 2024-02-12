@@ -2,7 +2,9 @@
 
 ## Overview
 
-JasonFunbot is a Python-based Telegram bot developed to add a dash of spontaneity and adventure to your group chats. Whether you need an auto-reply feature for your friends or assistance in making plans, JasonFunbot steps in as the perfect "third-party" friend to liven up your conversations and activities.
+JasonFunbot is a Python-based Telegram bot designed to inject spontaneity and excitement into your group chats. Acting as the ultimate "third-party" friend, JasonFunbot enhances interactions and facilitates activity planning to make your conversations and experiences more enjoyable.
+
+Please note that JasonFunbot is currently not hosted on a server, so it may be offline.
 
 ## Features
 
@@ -22,3 +24,36 @@ JasonFunbot is a Python-based Telegram bot developed to add a dash of spontaneit
 
 3. **Plan Activities:**
    - Use the `/plan` command to get suggestions for spontaneous activities or adventures. JasonFunbot will provide creative ideas to make your plans more exciting.
+   - 
+## Installation
+
+To run this project locally, follow these steps:
+
+1. **Clone the repository:**
+
+    ```bash
+    git clone https://github.com/your-username/jasonfunbot.git
+    ```
+
+2. **Navigate into the project directory:**
+
+    ```bash
+    cd jasonfunbot
+    ```
+
+3. **Install dependencies:**
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4. **Obtain your Telegram bot token from BotFather and replace `"YOUR_BOT_TOKEN"` in the code with your token.**
+
+5. **Run the bot:**
+
+    ```bash
+    python jasonfunbot.py
+    ```
+
+   Your bot should now be up and running, ready to enhance your Telegram group chats!
+
