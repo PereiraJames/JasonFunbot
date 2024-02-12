@@ -4,20 +4,12 @@ from telegram.ext import Application, CommandHandler, MessageHandler, filters, C
 import keys
 import random
 import csv
+import targetsinfo
 
 TOKEN: Final = keys.Bot_Token
 BOT_USERNAME: Final = keys.Bot_Username
 
-insultTargets = {
-    'mark' : 'Markryann',
-    'chris' : 'Chrisdouglass',
-    'keagan' : 'keaganoliverio',
-    'maj' : 'majells',
-    'fel' : 'feliciachiam',
-    'deion' : 'Deionos',
-    'skye' : 'schuylerholland',
-    'james' : 'Pereira_James'
-}
+insultTargets = targetsinfo.insultTargets
 
 # Commands
 async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -103,7 +95,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     for i in insultTargets:
         if targetsName == insultTargets[i]:
-            ranNum = random.randint(0,1)
+            ranNum = random.randint(0,10)
             print("Random Number: " + str(ranNum))
             if ranNum == 1:
                 insult = generate_Insult(targetsName)
