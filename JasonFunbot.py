@@ -1,17 +1,12 @@
 from typing import Final
 from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
+import keys
 import random
 import csv
 
-# TEST BOT [JasonTheOracleBot]
-
-# TOKEN: Final = '6477788936:AAEHHP-zrcLtqoY3DeapLjVJO2_KzguxnLA'
-# BOT_USERNAME: Final = '@JasonTheOracleBot'
-
-# REAL BOT [JasonFunbot]
-TOKEN: Final = '6939406357:AAHxZ7NhCBWOhvIqUPBmu1QMdbLOK76_DkU'
-BOT_USERNAME: Final = '@JasonFunbot'
+TOKEN: Final = keys.Bot_Token
+BOT_USERNAME: Final = keys.Bot_Username
 
 insultTargets = {
     'mark' : 'Markryann',
@@ -41,7 +36,7 @@ def generate_Insult(targetsUsername):
 
     targetName = flipped_dict[targetsUsername]
 
-    filename = targetName + '.csv'
+    filename = 'insultTargets/' + targetName + '.csv'
 
     targetInsults = []
 
@@ -81,13 +76,16 @@ def handle_response(text: str) -> str:
 
     if "dong" in proceseed:
         return "Did you just say dong"
-
+    if "dick" in proceseed:
+        return "GAYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYEHHHHHHHHHHHHHHH"
+        
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     username = update.message.chat.username
 
-    
+    # location_long = update.message.location.latitude
+    # location_lat = update.message.location.longitude
 
     message_type: str = update.message.chat.type
 
@@ -95,9 +93,13 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         message_type = update.message.chat.title
 
     text: str = update.message.text
+
     targetsName = update.message.from_user.username
 
     print(f'{targetsName} ({update.message.chat.id}) in {message_type}: "{text}"')
+
+    # print(location_lat)
+    # print(location_long)
 
     for i in insultTargets:
         if targetsName == insultTargets[i]:
@@ -116,6 +118,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             return
     else:
         response: str = handle_response(text)
+       
 
     if response != None:
         print('Bot:', response)
