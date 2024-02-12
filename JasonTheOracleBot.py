@@ -4,14 +4,9 @@ from telegram.ext import Application, CommandHandler, MessageHandler, filters, C
 import random
 import csv
 
-# TEST BOT [JasonTheOracleBot]
-
-# TOKEN: Final = '6477788936:AAEHHP-zrcLtqoY3DeapLjVJO2_KzguxnLA'
-# BOT_USERNAME: Final = '@JasonTheOracleBot'
-
 # REAL BOT [JasonFunbot]
-TOKEN: Final = '6939406357:AAHxZ7NhCBWOhvIqUPBmu1QMdbLOK76_DkU'
-BOT_USERNAME: Final = '@JasonFunbot'
+TOKEN: Final = "6477788936:AAEHHP-zrcLtqoY3DeapLjVJO2_KzguxnLA"
+BOT_USERNAME: Final = "JasonFun"
 
 insultTargets = {
     'mark' : 'Markryann',
@@ -32,7 +27,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text('I HELP!')
 
 async def custom_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text('CUSTUMMM')
+    await update.message.reply_text('CUSTUMMM')    
 
 # Responses
 def generate_Insult(targetsUsername):
@@ -61,7 +56,7 @@ def generate_Insult(targetsUsername):
         for i in range(1, len(targetInsults)):
             if targetInsults[i][1] == targetInsults[0][1]:
                 All_Count += 1
-
+        
         if All_Count == len(targetInsults):
             targetInsults[0][1] += 1
 
@@ -78,30 +73,22 @@ def generate_Insult(targetsUsername):
 
 def handle_response(text: str) -> str:
     proceseed: str = text.lower()
-
+    
     if "dong" in proceseed:
         return "Did you just say dong"
-
+    
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
-    username = update.message.chat.username
-
-    
-
     message_type: str = update.message.chat.type
-
-    if message_type != "private":
-        message_type = update.message.chat.title
-
     text: str = update.message.text
     targetsName = update.message.from_user.username
 
-    print(f'{targetsName} ({update.message.chat.id}) in {message_type}: "{text}"')
-
+    print(f'User ({update.message.chat.id}) in {message_type}: "{text}"')
+    
     for i in insultTargets:
         if targetsName == insultTargets[i]:
-            ranNum = random.randint(0,1)
+            ranNum = random.randint(0,10)
             print("Random Number: " + str(ranNum))
             if ranNum == 1:
                 insult = generate_Insult(targetsName)
@@ -123,8 +110,8 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def error(update: Update, context: ContextTypes.DEFAULT_TYPE):
     #Can be used to get user information
-    # print(f'Update {update} caused error {context.error}')
-    return
+    print(f'Update {update} caused error {context.error}') 
+    return 
 
 if __name__ == '__main__':
     print('Starting bot...')
