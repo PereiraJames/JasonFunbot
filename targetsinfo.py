@@ -1,10 +1,8 @@
-insultTargets = {
-    'mark' : 'Markryann',
-    'chris' : 'Chrisdouglass',
-    'keagan' : 'keaganoliverio',
-    'maj' : 'majells',
-    'fel' : 'feliciachiam',
-    'deion' : 'Deionos',
-    'skye' : 'schuylerholland',
-    'james' : 'Pereira_James'
-}
+mark = 'Markryann',
+chris = 'Chrisdouglass',
+keagan = 'keaganoliverio',
+maj = 'majella',
+fel = 'feliciachiam',
+deion = 'Deionos',
+skye = 'schuylerholland',
+james ='Pereira_James'

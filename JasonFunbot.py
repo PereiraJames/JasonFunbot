@@ -9,7 +9,18 @@ import targetsinfo
 TOKEN: Final = keys.Bot_Token
 BOT_USERNAME: Final = keys.Bot_Username
 
-insultTargets = targetsinfo.insultTargets
+insultTargets = {
+    'mark' : targetsinfo.mark,
+    'chris' : targetsinfo.chris,
+    'keagan' : targetsinfo.keagan,
+    'maj' : targetsinfo.maj,
+    'fel' : targetsinfo.fel,
+    'deion' : targetsinfo.deion,
+    'skye' : targetsinfo.skye,
+    'james' : targetsinfo.james,
+    'example' : 'example_tele_username'
+}
+
 
 # Commands
 async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
