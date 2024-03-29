@@ -1,5 +1,6 @@
 from typing import Final
-from telegram import Update
+import asyncio
+from telegram import Update, Bot
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
 import keys
 import random
@@ -8,6 +9,7 @@ import targetsinfo
 
 TOKEN: Final = keys.Bot_Token
 BOT_USERNAME: Final = keys.Bot_Username
+MASTER = targetsinfo.james
 
 insultTargets = {
     'mark' : targetsinfo.mark,
@@ -24,7 +26,13 @@ insultTargets = {
 
 # Commands
 async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text('WAS UP FKER!')
+    await context.bot.send_message(chat_id=update.effective_chat.id, text='JasonFunbot Intializing...')
+    await asyncio.sleep(2)
+    await context.bot.send_message(chat_id=update.effective_chat.id, text='JasonFunbot Analyzing System...')
+    await asyncio.sleep(2)
+    await context.bot.send_message(chat_id=update.effective_chat.id, text='JasonFunbot Online')
+    # await update.message.reply_text('JasonFunbot Intializing...')
+    # await update.message.reply_text('JasonFunbot Online')
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text('I HELP!')
@@ -106,8 +114,8 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     for i in insultTargets:
         if targetsName == insultTargets[i]:
-            ranNum = random.randint(0,10)
-            print("Random Number: " + str(ranNum))
+            ranNum = random.randint(1,3)
+            print("Random Number: " + str(ranNum) + " (" + targetsName + ")")
             if ranNum == 1:
                 insult = generate_Insult(targetsName)
                 print("JasonBot: " + insult)
@@ -134,12 +142,13 @@ async def error(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 if __name__ == '__main__':
     print('Starting bot...')
+    
     app = Application.builder().token(TOKEN).build()
 
     # Commands
-    app.add_handler(CommandHandler('start', start_command))
-    app.add_handler(CommandHandler('help', help_command))
-    app.add_handler(CommandHandler('custom', custom_command))
+    app.add_handler(CommandHandler('rise', start_command, filters.User(username=MASTER)))
+    # app.add_handler(CommandHandler('help', help_command, filters.User(username=MASTER)))
+    # app.add_handler(CommandHandler('custom', custom_command,filters.User(username=MASTER)))
     # Messages
     app.add_handler(MessageHandler(filters.TEXT, handle_message))
 
