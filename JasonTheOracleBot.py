@@ -88,7 +88,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
     for i in insultTargets:
         if targetsName == insultTargets[i]:
-            ranNum = random.randint(0,10)
+            ranNum = random.randint(0,25)
             print("Random Number: " + str(ranNum))
             if ranNum == 1:
                 insult = generate_Insult(targetsName)

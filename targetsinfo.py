@@ -1,8 +1,0 @@
-mark = 'Markryann'
-chris = 'Chrisdouglasss'
-keagan = 'keaganoliverio'
-maj = 'majella'
-fel = 'feliciachiam'
-deion = 'Deionos'
-skye = 'schuylerholland'
-james ='Pereira_James'

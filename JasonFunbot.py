@@ -5,7 +5,8 @@ from telegram.ext import Application, CommandHandler, MessageHandler, filters, C
 import keys
 import random
 import csv
-import targetsinfo
+from datetime import datetime
+import insultTargets.targetsinfo as targetsinfo
 
 TOKEN: Final = keys.Bot_Token
 BOT_USERNAME: Final = keys.Bot_Username
@@ -82,6 +83,12 @@ def generate_Insult(targetsUsername):
 
     return insult
 
+def messagelog(incoming_message, grouptype):
+    current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    filename = f'messagelogs/{grouptype}.txt'
+    with open(filename, 'a') as file:
+        file.write("(" + current_time + ") " + incoming_message + '\n')
+
 def handle_response(text: str) -> str:
     proceseed: str = text.lower()
 
@@ -105,20 +112,23 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     text: str = update.message.text
 
-    targetsName = update.message.from_user.username
+    ranNum = random.randint(1,3)
 
-    print(f'{targetsName} ({update.message.chat.id}) in {message_type}: "{text}"')
+    targetsName = update.message.from_user.username
+    incomingmessage = f'{targetsName} ({update.message.chat.id}) | ({ranNum}) in {message_type}: "{text}"'
+
+    print(incomingmessage, message_type)
+    messagelog(incomingmessage, message_type)
 
     # print(location_lat)
     # print(location_long)
 
     for i in insultTargets:
         if targetsName == insultTargets[i]:
-            ranNum = random.randint(1,3)
-            print("Random Number: " + str(ranNum) + " (" + targetsName + ")")
             if ranNum == 1:
                 insult = generate_Insult(targetsName)
                 print("JasonBot: " + insult)
+                messagelog("JasonBot: " + insult, message_type)
                 await update.message.reply_text(insult)
 
     if message_type == 'group':
